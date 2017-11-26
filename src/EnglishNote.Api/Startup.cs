@@ -11,6 +11,8 @@ using Microsoft.Extensions.Options;
 using EnglishNote.Api.SQLite;
 using EnglishNote.Api.Settings;
 using Newtonsoft.Json;
+using EnglishNote.Api.Repositories;
+using EnglishNote.Api.Services;
 
 namespace EnglishNote.Api
 {
@@ -29,6 +31,8 @@ namespace EnglishNote.Api
             services.AddMvc()
                 .AddJsonOptions(x => x.SerializerSettings.Formatting = Formatting.Indented);
             services.AddOptions();
+            services.AddScoped<ISentenceRepository, SentenceRepository>();
+            services.AddScoped<ISentenceService, SentenceService>();
             services.Configure<SQLiteSettings>(Configuration.GetSection("sqlite"));
             services.AddEntityFrameworkSqlite().AddDbContext<DatabaseContext>();
         }
