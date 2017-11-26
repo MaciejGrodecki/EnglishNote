@@ -29,7 +29,7 @@ namespace EnglishNote.Api
             services.AddMvc()
                 .AddJsonOptions(x => x.SerializerSettings.Formatting = Formatting.Indented);
             services.AddOptions();
-            //services.Configure<SQLiteSettings>(Configuration.GetSection("sqlite"));
+            services.Configure<SQLiteSettings>(Configuration.GetSection("sqlite"));
             services.AddEntityFrameworkSqlite().AddDbContext<DatabaseContext>();
         }
 

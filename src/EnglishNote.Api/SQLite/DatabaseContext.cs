@@ -21,8 +21,7 @@ namespace EnglishNote.Api.SQLite
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlite(_sqlLiteSettings.ConnectionString);
-            optionsBuilder.UseSqlite("Data Source=engnote.db");
+            optionsBuilder.UseSqlite(_sqlLiteSettings.ConnectionString);
         }
     }
 }
