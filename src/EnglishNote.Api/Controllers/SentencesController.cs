@@ -19,13 +19,22 @@ namespace EnglishNote.Api.Controllers
             _sentenceService = sentenceService;
         }
 
-        //Get api/sentences/
+        //GET api/sentences/
         [HttpGet]
         public async Task<IActionResult> Get()
         {
             var sentences = await _sentenceService.BrowseAsync();
 
             return Json(sentences);
+        }
+
+        //GET api/sentences/sentenceId
+        [HttpGet("{sentenceId}")]
+        public async Task<IActionResult> Get(Guid sentenceId)
+        {
+            var sentence = await _sentenceService.GetAsync(sentenceId);
+
+            return Json(sentence);
         }
 
         //POST api/sentences/
@@ -35,6 +44,15 @@ namespace EnglishNote.Api.Controllers
             await _sentenceService.AddAsync(command.PolishSentence, command.EnglishSentence);
 
             return Created($"/ senteces /{ command.EnglishSentence}", null);
+        }
+
+        //DELETE api/sentences/{sentenceid}
+        [HttpDelete("{sentenceId}")]
+        public async Task<IActionResult> Delete(Guid sentenceId)
+        {
+            await _sentenceService.RemoveAsync(sentenceId);
+
+            return NoContent();
         }
     }
 }
